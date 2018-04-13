@@ -1,0 +1,75 @@
+    <mat-card *ngIf="equityPeriodical" ngForm #equityPeriodicalForm="ngForm">
+        <mat-card-title>EquityPeriodical Details</mat-card-title>
+        <mat-card-content>
+        <div class="ui-g alignlabels">
+                 <div class="ui-g-12 ui-md-2 ui-lg-1"><label for="symbolTicker"  class="required">Symbol Ticker</label></div>
+                <div class="ui-g-12 ui-md-10 ui-lg-5">
+                <mat-input-container style="width: 90%">
+                    <input matInput id="symbolTicker" type="text" [(ngModel)]="equityPeriodical.symbolTicker"  required   name="symbolTicker" #symbolTicker="ngModel"/>
+                    
+                    <mat-error *ngIf="!symbolTicker.valid && symbolTicker.dirty && symbolTicker.errors['required']">
+                        Symbol Ticker is required.
+                    </mat-error>
+                </mat-input-container>
+                </div>
+                 <div class="ui-g-12 ui-md-2 ui-lg-1"><label for="timePeriod"  class="required">Time Period</label></div>
+                <div class="ui-g-12 ui-md-10 ui-lg-5">
+                <mat-input-container style="width: 90%">
+                    <input matInput id="timePeriod" type="text" [(ngModel)]="equityPeriodical.timePeriod"  required   name="timePeriod" #timePeriod="ngModel"/>
+                    
+                    <mat-error *ngIf="!timePeriod.valid && timePeriod.dirty && timePeriod.errors['required']">
+                        Time Period is required.
+                    </mat-error>
+                </mat-input-container>
+                </div>
+                 <div class="ui-g-12 ui-md-2 ui-lg-1"><label for="firstPricingDate"  class="required">First Pricing Date</label></div>
+                <div class="ui-g-12 ui-md-10 ui-lg-5">
+                <p-calendar [(ngModel)]="equityPeriodical.firstPricingDate" dateFormat="yy-mm-dd" showTime="true" [ngModelOptions]="{standalone: true}"></p-calendar>
+                </div>
+                 <div class="ui-g-12 ui-md-2 ui-lg-1"><label for="firstClosePrice" >First Close Price</label></div>
+                <div class="ui-g-12 ui-md-10 ui-lg-5">
+                <mat-input-container style="width: 90%">
+                    <input matInput id="firstClosePrice" type="number" [(ngModel)]="equityPeriodical.firstClosePrice"  name="firstClosePrice" #firstClosePrice="ngModel" />
+                    
+                </mat-input-container>
+                </div>
+                 <div class="ui-g-12 ui-md-2 ui-lg-1"><label for="lastPricingDate"  class="required">Last Pricing Date</label></div>
+                <div class="ui-g-12 ui-md-10 ui-lg-5">
+                <p-calendar [(ngModel)]="equityPeriodical.lastPricingDate" dateFormat="yy-mm-dd" showTime="true" [ngModelOptions]="{standalone: true}"></p-calendar>
+                </div>
+                 <div class="ui-g-12 ui-md-2 ui-lg-1"><label for="lastClosePrice" >Last Close Price</label></div>
+                <div class="ui-g-12 ui-md-10 ui-lg-5">
+                <mat-input-container style="width: 90%">
+                    <input matInput id="lastClosePrice" type="number" [(ngModel)]="equityPeriodical.lastClosePrice"  name="lastClosePrice" #lastClosePrice="ngModel" />
+                    
+                </mat-input-container>
+                </div>
+                 <div class="ui-g-12 ui-md-2 ui-lg-1"><label for="priceDiff" >Price Diff</label></div>
+                <div class="ui-g-12 ui-md-10 ui-lg-5">
+                <mat-input-container style="width: 90%">
+                    <input matInput id="priceDiff" type="number" [(ngModel)]="equityPeriodical.priceDiff"  name="priceDiff" #priceDiff="ngModel" />
+                    
+                </mat-input-container>
+                </div>
+                 <div class="ui-g-12 ui-md-2 ui-lg-1"><label for="priceDiffPercent" >Price Diff Percent</label></div>
+                <div class="ui-g-12 ui-md-10 ui-lg-5">
+                <mat-input-container style="width: 90%">
+                    <input matInput id="priceDiffPercent" type="number" [(ngModel)]="equityPeriodical.priceDiffPercent"  name="priceDiffPercent" #priceDiffPercent="ngModel" />
+                    
+                </mat-input-container>
+                </div>
+                 <div class="ui-g-12 ui-md-2 ui-lg-1"><label for="observedRecords" >Observed Records</label></div>
+                <div class="ui-g-12 ui-md-10 ui-lg-5">
+                <mat-input-container style="width: 90%">
+                    <input matInput id="observedRecords" type="number" [(ngModel)]="equityPeriodical.observedRecords"  name="observedRecords" #observedRecords="ngModel" />
+                    
+                </mat-input-container>
+                </div>
+          </div>
+        </mat-card-content>
+        <mat-card-actions>
+            <button mat-raised-button *ngIf="sub" (click)="onCancel()"><mat-icon>cancel</mat-icon>Cancel</button>
+            <button mat-raised-button (click)="onSave()" [disabled]="!equityPeriodicalForm.form.valid"><mat-icon>save</mat-icon>Save</button>
+        </mat-card-actions>
+    </mat-card>
+

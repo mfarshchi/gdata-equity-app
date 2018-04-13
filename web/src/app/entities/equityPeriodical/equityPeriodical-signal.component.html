@@ -1,0 +1,89 @@
+<div class="ContentSideSections Implementation">
+  <mat-card *ngIf="!sub">
+    <mat-card-title>Search Equities on Periodical Signals </mat-card-title>
+    <mat-card-content>
+
+      <div class="ui-grid ui-grid-responsive ui-fluid ui-grid-pad" ngForm #equityPeriodicalForm="ngForm">
+        <div class="ui-grid-row">
+          <div class="ui-grid-col-2">
+            <label for="timePeriod">Time Period</label>
+          </div>
+          <div class="ui-grid-col-6">
+            <input pInputText id="timePeriod" [(ngModel)]="timePeriod" name="timePeriod" />
+          </div>
+        </div>
+        <div class="ui-grid-row">
+          <div class="ui-grid-col-2">
+            <label for="fromPriceDiffPercent">From Price Difference In Percent</label>
+          </div>
+          <div class="ui-grid-col-6">
+            <input pInputText id="fromPriceDiffPercent" [(ngModel)]="fromPriceDiffPercent" name="fromPriceDiffPercent" />
+          </div>
+        </div>
+        <div class="ui-grid-row">
+          <div class="ui-grid-col-2">
+            <label for="toPriceDiffPercent">To Price Difference In Percent</label>
+          </div>
+          <div class="ui-grid-col-6">
+            <input pInputText id="toPriceDiffPercent" [(ngModel)]="toPriceDiffPercent" name="toPriceDiffPercent" />
+          </div>
+        </div>
+        <div class="ui-grid-row">
+          <div class="ui-grid-col-2">
+            <label for="observedRecords">Number of Observed Records (Greater or Equal Than) </label>
+          </div>
+          <div class="ui-grid-col-6">
+            <input pInputText id="observedRecords" [(ngModel)]="observedRecords" name="observedRecords" />
+          </div>
+        </div>
+
+      </div>
+
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-raised-button (click)="search(dt)"><mat-icon>search</mat-icon>Search</button>
+    </mat-card-actions>
+  </mat-card>
+
+  <br/>
+  <mat-card>
+    <mat-card-content>
+
+      <p-dataTable #dt [value]="equityPeriodicalList"
+                   [lazy]="true"
+                   [rows]="30"
+                   [paginator]="currentPage.totalElements > 10"
+                   [totalRecords]="currentPage.totalElements"
+                   (onLazyLoad)="findEquityPeriodicalSignal($event)"
+                   selectionMode="single"
+                   (onRowSelect)="onRowSelect($event)"
+                   [rowsPerPageOptions]="[5,10,20,50,100]"
+                   [responsive]="true">
+        <p-header>{{header}} (count: {{currentPage.totalElements}})</p-header>
+        <p-column field="symbolTicker" header="Symbol Ticker" sortable="true">
+        </p-column>
+        <p-column field="timePeriod" header="Time Period" sortable="true">
+        </p-column>
+        <p-column field="firstPricingDate" header="First Pricing Date" sortable="true">
+        </p-column>
+        <p-column field="firstClosePrice" header="First Close Price" sortable="true">
+        </p-column>
+        <p-column field="lastPricingDate" header="Last Pricing Date" sortable="true">
+        </p-column>
+        <p-column field="lastClosePrice" header="Last Close Price" sortable="true">
+        </p-column>
+        <p-column field="priceDiff" header="Price Difference" sortable="true">
+        </p-column>
+        <p-column field="priceDiffPercent" header="Price Difference Percent" sortable="true">
+        </p-column>
+        <p-column field="observedRecords" header="Observed Records" sortable="true">
+        </p-column>
+        <p-column styleClass="col-icon">
+          <ng-template let-equityPeriodical="rowData" pTemplate="body">
+            <button type="button" pButton icon="fa-line-chart"  style="float:left"></button>
+          </ng-template>
+        </p-column>
+      </p-dataTable>
+    </mat-card-content>
+  </mat-card>
+</div>

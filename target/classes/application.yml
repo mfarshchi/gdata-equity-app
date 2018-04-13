@@ -1,0 +1,56 @@
+---
+#
+# https://docs.spring.io/spring-boot/docs/current/reference/html/common-application-properties.html
+#
+
+server:
+    port: 8080
+
+security:
+    basic:
+        enabled: false
+
+# Note: the properties surounded by arobase are defined in the pom.xml file
+#       and get replaced by maven during build time. Resulting file can
+#       be found in target/classes folder
+
+spring:
+
+    datasource:
+        driver-class-name: com.mysql.jdbc.Driver
+        url: jdbc:mysql://127.0.0.1:3306/anzdb
+        name:
+        username: root
+        password: admin
+
+    jpa:
+        open-in-view: false
+        hibernate:
+            ddl-auto: none
+            naming.physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+
+        database-platform: org.hibernate.dialect.MySQL57InnoDBDialect
+        database: MYSQL
+        show_sql: true
+        properties:
+            hibernate.cache.use_second_level_cache: false
+            hibernate.cache.use_query_cache: false
+            hibernate.generate_statistics: false
+
+    mail:
+        host: localhost
+
+    messages:
+        cache-seconds: 1
+
+    resources:
+        chain:
+            cache: false
+
+---
+
+#
+# profile used by Dockerfile... just for convenient demo
+#
+spring.profiles: demowithdocker
+spring.datasource.url: jdbc:h2:/db/anzdb;MVCC=TRUE;FILE_LOCK=NO

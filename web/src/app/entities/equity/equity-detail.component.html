@@ -1,0 +1,95 @@
+    <mat-card *ngIf="equity" ngForm #equityForm="ngForm">
+        <mat-card-title>Equity Details</mat-card-title>
+        <mat-card-content>
+        <div class="ui-g alignlabels">
+                 <div class="ui-g-12 ui-md-2 ui-lg-1"><label for="pricingDate"  class="required">Pricing Date</label></div>
+                <div class="ui-g-12 ui-md-10 ui-lg-5">
+                <p-calendar [(ngModel)]="equity.pricingDate" dateFormat="yy-mm-dd" showTime="true" [ngModelOptions]="{standalone: true}"></p-calendar>
+                </div>
+                 <div class="ui-g-12 ui-md-2 ui-lg-1"><label for="symbolTicker"  class="required">Symbol Ticker</label></div>
+                <div class="ui-g-12 ui-md-10 ui-lg-5">
+                <mat-input-container style="width: 90%">
+                    <input matInput id="symbolTicker" type="text" [(ngModel)]="equity.symbolTicker"  required   name="symbolTicker" #symbolTicker="ngModel"/>
+                    
+                    <mat-error *ngIf="!symbolTicker.valid && symbolTicker.dirty && symbolTicker.errors['required']">
+                        Symbol Ticker is required.
+                    </mat-error>
+                </mat-input-container>
+                </div>
+                 <div class="ui-g-12 ui-md-2 ui-lg-1"><label for="symbolExchange"  class="required">Symbol Exchange</label></div>
+                <div class="ui-g-12 ui-md-10 ui-lg-5">
+                <mat-input-container style="width: 90%">
+                    <input matInput id="symbolExchange" type="text" [(ngModel)]="equity.symbolExchange"  required   name="symbolExchange" #symbolExchange="ngModel"/>
+                    
+                    <mat-error *ngIf="!symbolExchange.valid && symbolExchange.dirty && symbolExchange.errors['required']">
+                        Symbol Exchange is required.
+                    </mat-error>
+                </mat-input-container>
+                </div>
+                 <div class="ui-g-12 ui-md-2 ui-lg-1"><label for="currencyISO" >Currency ISO</label></div>
+                <div class="ui-g-12 ui-md-10 ui-lg-5">
+                <mat-input-container style="width: 90%">
+                    <input matInput id="currencyISO" type="text" [(ngModel)]="equity.currencyISO"   name="currencyISO" #currencyISO="ngModel"/>
+                    
+                </mat-input-container>
+                </div>
+                 <div class="ui-g-12 ui-md-2 ui-lg-1"><label for="openPrice" >Open Price</label></div>
+                <div class="ui-g-12 ui-md-10 ui-lg-5">
+                <mat-input-container style="width: 90%">
+                    <input matInput id="openPrice" type="number" [(ngModel)]="equity.openPrice"  name="openPrice" #openPrice="ngModel" />
+                    
+                </mat-input-container>
+                </div>
+                 <div class="ui-g-12 ui-md-2 ui-lg-1"><label for="closePrice" >Close Price</label></div>
+                <div class="ui-g-12 ui-md-10 ui-lg-5">
+                <mat-input-container style="width: 90%">
+                    <input matInput id="closePrice" type="number" [(ngModel)]="equity.closePrice"  name="closePrice" #closePrice="ngModel" />
+                    
+                </mat-input-container>
+                </div>
+                 <div class="ui-g-12 ui-md-2 ui-lg-1"><label for="volume"  class="required">Volume</label></div>
+                <div class="ui-g-12 ui-md-10 ui-lg-5">
+                <mat-input-container style="width: 90%">
+                    <input matInput id="volume" type="number" [(ngModel)]="equity.volume"  required  name="volume" #volume="ngModel" />
+                    
+                    <mat-error *ngIf="!volume.valid && volume.dirty && volume.errors['required']">
+                        Volume is required.
+                    </mat-error>
+                </mat-input-container>
+                </div>
+                 <div class="ui-g-12 ui-md-2 ui-lg-1"><label for="dayPriceDiff" >Day Price Diff</label></div>
+                <div class="ui-g-12 ui-md-10 ui-lg-5">
+                <mat-input-container style="width: 90%">
+                    <input matInput id="dayPriceDiff" type="number" [(ngModel)]="equity.dayPriceDiff"  name="dayPriceDiff" #dayPriceDiff="ngModel" />
+                    
+                </mat-input-container>
+                </div>
+                 <div class="ui-g-12 ui-md-2 ui-lg-1"><label for="fiveDaysPriceDiff" >Five Days Price Diff</label></div>
+                <div class="ui-g-12 ui-md-10 ui-lg-5">
+                <mat-input-container style="width: 90%">
+                    <input matInput id="fiveDaysPriceDiff" type="number" [(ngModel)]="equity.fiveDaysPriceDiff"  name="fiveDaysPriceDiff" #fiveDaysPriceDiff="ngModel" />
+                    
+                </mat-input-container>
+                </div>
+                 <div class="ui-g-12 ui-md-2 ui-lg-1"><label for="monthPriceDiff" >Month Price Diff</label></div>
+                <div class="ui-g-12 ui-md-10 ui-lg-5">
+                <mat-input-container style="width: 90%">
+                    <input matInput id="monthPriceDiff" type="number" [(ngModel)]="equity.monthPriceDiff"  name="monthPriceDiff" #monthPriceDiff="ngModel" />
+                    
+                </mat-input-container>
+                </div>
+                 <div class="ui-g-12 ui-md-2 ui-lg-1"><label for="movAvg5Days" >Mov Avg5Days</label></div>
+                <div class="ui-g-12 ui-md-10 ui-lg-5">
+                <mat-input-container style="width: 90%">
+                    <input matInput id="movAvg5Days" type="number" [(ngModel)]="equity.movAvg5Days"  name="movAvg5Days" #movAvg5Days="ngModel" />
+                    
+                </mat-input-container>
+                </div>
+          </div>
+        </mat-card-content>
+        <mat-card-actions>
+            <button mat-raised-button *ngIf="sub" (click)="onCancel()"><mat-icon>cancel</mat-icon>Cancel</button>
+            <button mat-raised-button (click)="onSave()" [disabled]="!equityForm.form.valid"><mat-icon>save</mat-icon>Save</button>
+        </mat-card-actions>
+    </mat-card>
+

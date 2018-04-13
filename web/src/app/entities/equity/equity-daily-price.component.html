@@ -1,0 +1,90 @@
+<script src="assets/jquery.min.js"></script>
+<script src="assets/highcharts.js"></script>
+<script src="assets/exporting.js"></script>
+<script src="assets/export-data.js"></script>
+
+<div class="ContentSideSections Implementation">
+  <mat-card *ngIf="!sub">
+    <mat-card-title>Search Equity with search criterias</mat-card-title>
+    <mat-card-content>
+      <div class="ui-grid ui-grid-responsive ui-fluid ui-grid-pad" ngForm #equityForm="ngForm">
+        <div class="ui-grid-row">
+          <div class="ui-grid-col-2">
+            <label for="symbolTicker">Symbol Ticker</label>
+          </div>
+          <div class="ui-grid-col-6">
+            <input pInputText id="symbolTicker" [(ngModel)]="example.symbolTicker" name="symbolTicker" #symbolTicker="ngModel"/>
+          </div>
+        </div>
+        <div class="ui-grid-row">
+          <div class="ui-grid-col-2">
+            <label for="symbolExchange">Symbol Exchange</label>
+          </div>
+          <div class="ui-grid-col-6">
+            <input pInputText id="symbolExchange" [(ngModel)]="example.symbolExchange" name="symbolExchange" #symbolExchange="ngModel"/>
+          </div>
+        </div>
+        <div class="ui-grid-row">
+          <div class="ui-grid-col-2">
+            <label for="currencyISO">Currency ISO</label>
+          </div>
+          <div class="ui-grid-col-6">
+            <input pInputText id="currencyISO" [(ngModel)]="example.currencyISO" name="currencyISO" #currencyISO="ngModel"/>
+          </div>
+        </div>
+      </div>
+
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-raised-button (click)="search(dt)"><mat-icon>search</mat-icon>Search</button>
+    </mat-card-actions>
+  </mat-card>
+
+  <br/>
+  <mat-card>
+    <mat-card-content>
+      <p>The list of results below is server-side paginated...</p>
+
+      <p-dataTable #dt [value]="equityList"
+                   [lazy]="true"
+                   [rows]="30"
+                   [paginator]="currentPage.totalElements > 10"
+                   [totalRecords]="currentPage.totalElements"
+                   (onLazyLoad)="loadPage($event)"
+                   selectionMode="single"
+                   (onRowSelect)="onRowSelect($event)"
+                   [rowsPerPageOptions]="[5,10,20,50,100]"
+                   [responsive]="true">
+        <p-header>{{header}} (count: {{currentPage.totalElements}})</p-header>
+        <p-column field="pricingDate" header="Pricing Date" sortable="true">
+        </p-column>
+        <p-column field="symbolTicker" header="Symbol Ticker" sortable="true">
+        </p-column>
+        <p-column field="symbolExchange" header="Symbol Exchange" sortable="true">
+        </p-column>
+        <p-column field="currencyISO" header="Currency ISO" sortable="true">
+        </p-column>
+        <p-column field="openPrice" header="Open Price" sortable="true">
+        </p-column>
+        <p-column field="closePrice" header="Close Price" sortable="true">
+        </p-column>
+        <p-column field="volume" header="Volume" sortable="true">
+        </p-column>
+        <p-column field="dayPriceDiff" header="Day Price Difference" sortable="true">
+        </p-column>
+        <p-column field="movAvg5Days" header="5 Days Moving Average" sortable="true">
+        </p-column>
+        <p-column styleClass="col-icon">
+            <ng-template let-equity="rowData" pTemplate="body">
+                <button type="button" pButton icon="fa-line-chart" style="float:left"></button>
+            </ng-template>
+        </p-column>
+      </p-dataTable>
+    </mat-card-content>
+    <!--
+    <mat-card-actions>
+        <button mat-raised-button (click)="addNew()"><mat-icon>add</mat-icon>Add</button>
+    </mat-card-actions>
+    -->
+  </mat-card>
+</div>
